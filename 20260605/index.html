@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楽家事リスト</title>
+    <style>
+        body { font-family: sans-serif; background: #fdf6e3; padding: 20px; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+        h2 { border-bottom: 2px solid #2aa198; padding-bottom: 10px; }
+        input { width: 70%; padding: 8px; }
+        button { padding: 8px; background: #2aa198; color: white; border: none; cursor: pointer; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📝 お買い物リスト</h2>
+        <input type="text" id="item" placeholder="買うものを入力">
+        <button onclick="addItem()">追加</button>
+        <ul id="list"></ul>
+    </div>
+    <script>
+        function addItem() {
+            const input = document.getElementById('item');
+            if (!input.value) return;
+            const li = document.createElement('li');
+            li.innerHTML = `${input.value} <button onclick="this.parentElement.remove()" style="background:#dc322f; font-size:0.7rem;">削除</button>`;
+            document.getElementById('list').appendChild(li);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
