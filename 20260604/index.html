@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楽家事タイマー</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #fff5f5; }
+        .box { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; width: 280px; }
+        #display { font-size: 3rem; margin: 20px 0; font-weight: bold; color: #e74c3c; }
+        button { padding: 10px 20px; font-size: 1rem; cursor: pointer; border: none; border-radius: 5px; background: #e74c3c; color: white; margin: 5px; }
+        button:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>⏱ 3分タイマー</h3>
+        <div id="display">03:00</div>
+        <button onclick="start()">スタート</button>
+        <button onclick="reset()" style="background:#95a5a6;">リセット</button>
+    </div>
+    <script>
+        let timeLeft = 180;
+        let timerId = null;
+        function updateDisplay() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            document.getElementById('display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        }
+        function start() {
+            if (timerId) return;
+            timerId = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) { clearInterval(timerId); alert("時間ですよ！"); reset(); }
+            }, 1000);
+        }
+        function reset() { clearInterval(timerId); timerId = null; timeLeft = 180; updateDisplay(); }
+    </script>
+</body>
+</html>
